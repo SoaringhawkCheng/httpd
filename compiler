@@ -1,0 +1,10 @@
+#!/bin/bash
+
+rm -f httpd_log httpd
+
+gcc -o vector.o -c vector.c -g
+gcc -o httpd.o -c my-httpd.c -g
+gcc -o httpd vector.o httpd.o -g -Wall -lpthread
+gcc -o client simpleclient.c -g -Wall
+
+rm -f vector.o httpd.o
