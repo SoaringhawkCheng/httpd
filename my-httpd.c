@@ -222,7 +222,7 @@ void send_file(int fd,char* path)
 	char content[512];
 	int html = open(path,O_RDWR);
 	int num = read(html,content,sizeof(content));
-	while(num != 0)
+	while(num > 0)
 	{
 		web_write(fd,content,num);
 		num = read(html,content,sizeof(content));
@@ -251,7 +251,7 @@ int web_write(int fd,char* content,int len){
 	int res = write(fd,content,len);
 	if(res < 0)
 	{
-		if(errno == SIGPIPE)
+		if(errno == EPIPE)
 		{
 			printf("write: peer has close connection...\n");
 			goto out;
@@ -344,6 +344,7 @@ readstart:
 					if(path[length-1] == '/')
 						strcat(path,"index.html");
 
+		//			sleep(3);
 					response(fd,path);
 				}
 			}
@@ -364,8 +365,8 @@ reset:
 
 int main(int argc,char* argv[])
 {
-//	sigignore(SIGHUP);
-//	sigignore(SIGPIPE);
+	sigignore(SIGHUP);
+	sigignore(SIGPIPE);
 	if( signal(SIGINT,signal_handle) == SIG_ERR )
 		err_exit("signal");
 	
