@@ -232,7 +232,7 @@ void send_file(int fd,char* path)
 
 int web_read(int fd, char* content, int len)
 {
-	int num = read(fd, content, sizeof(content));
+	int num = read(fd, content, len);
 	if(num == 0)
 	{
 		printf("read: peer has closed connection...\n");
