@@ -442,7 +442,6 @@ int main(int argc,char* argv[])
 		char *client_addr = inet_ntoa(client_name.sin_addr);
 		printf("client IP:%s, PORT:%d\n",client_addr,client_port);
 
-	//	http服务器编程 不适合使用非阻塞式的IO，因为很难一次读取完整的http报文
 	//	int val;
 	//	val = fcntl(sock_client, F_GETFL);
 	//	val |= O_NONBLOCK;
