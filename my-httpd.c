@@ -269,13 +269,13 @@ int response(int fd,char* path)
 	{
 		char info[128];
 		sprintf(info,"HTTP/1.1 200 OK\r\n");
-		web_write(fd,info,strlen(info));
+		web_write(fd,info,sizeof(info));
 		sprintf(info,"Content-Type: text/html\r\n");
-		web_write(fd,info,strlen(info));
+		web_write(fd,info,sizeof(info));
 		sprintf(info,SERVER_NAME);
-		web_write(fd,info,strlen(info));
+		web_write(fd,info,sizeof(info));
 		sprintf(info,"\r\n");
-		web_write(fd,info,strlen(info));
+		web_write(fd,info,sizeof(info));
 
 		send_file(fd,path);
 	}
