@@ -47,8 +47,8 @@ void fd_push(vector* v,int fd)
 	if(v->count == v->capacity)
 	{
 		size_t new = v->capacity * 2;
-		v->vec = realloc(v->vec,new);
-		memset(v->vec + v->capacity, 0, v->capacity);
+		v->vec = realloc(v->vec,new*sizeof(int));
+		memset(v->vec + v->capacity*sizeof(int), 0, sizeof(int)*v->capacity);
 		v->capacity = new;
 	}
 
